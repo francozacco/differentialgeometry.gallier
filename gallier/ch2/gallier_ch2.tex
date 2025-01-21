@@ -1,0 +1,863 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{adjustbox}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{tikz-cd}
+\usepackage[mathscr]{euscript}
+
+
+\title{\textbf{
+    Solutions to selected problems on Differential Geometry and Lie Groups
+    - Gallier.
+}}
+\author{Franco Zacco}
+\date{}
+
+\addtolength{\topmargin}{-3cm}
+\addtolength{\textheight}{3cm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\diam}{\text{diam}}
+\newcommand{\cl}{\text{cl}}
+\newcommand{\bdry}{\text{bdry}}
+\newcommand{\inter}{\text{Int}}
+\newcommand{\ext}{\text{Ext}}
+\newcommand{\Pow}{\mathcal{P}}
+\newcommand{\Topo}{\mathcal{T}}
+\newcommand{\Or}{\text{ or }}
+\newcommand{\setmin}{\setminus}
+
+
+\theoremstyle{definition}
+\newtheorem*{solution*}{Solution}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+Solutions to selected problems on Differential Geometry and Lie Groups from
+different books, but mainly from Gallier.
+\section*{Chapter 2 - The Matrix Exponential: Some Matrix and Lie Groups}
+
+\begin{proof}{\textbf{Problem 2.1.}}
+\begin{itemize}
+    \item [(a)] Let the following symmetric matrices
+    \begin{align*}
+        A = \begin{pmatrix}
+            2 & 0\\
+            0 & 1/2
+        \end{pmatrix}
+        \quad
+        B = \begin{pmatrix}
+            1 & 2\\
+            2 & 1
+        \end{pmatrix}
+    \end{align*}
+    Then $AB$ is given by
+    \begin{align*}
+        AB &= \begin{pmatrix}
+            2 & 0\\
+            0 & 1/2
+        \end{pmatrix}
+        \cdot
+        \begin{pmatrix}
+            1 & 2\\
+            2 & 1
+        \end{pmatrix}
+        = \begin{pmatrix}
+            2 + 0 & 4 + 0\\
+            0 + 1 & 0 + 1/2
+        \end{pmatrix}
+        = \begin{pmatrix}
+            2 & 4\\
+            1 & 1/2
+        \end{pmatrix}
+    \end{align*}
+    Which is non-symmetric.
+
+    \item [(b)] Let the following skew symmetric matrices
+    \begin{align*}
+        A = \pi\begin{pmatrix}
+            0 & 0 & 0\\
+            0 & 0 & -1\\
+            0 & 1 & 0
+        \end{pmatrix}
+        \quad
+        B = \pi\begin{pmatrix}
+            0 & 0 & 1\\
+            0 & 0 & 0\\
+            -1 & 0 & 0
+        \end{pmatrix}
+    \end{align*}
+    We can work out a explicit formula for $e^A$ and $e^B$ by using
+    Rodrigues formula. For $A$ we see that $A$ has the required form
+    \begin{align*}
+        A = \begin{pmatrix}
+            0 & -c & b\\
+            c & 0 & -a\\
+            -b & a & 0
+        \end{pmatrix}
+    \end{align*}
+    taking $a = \pi$ and $b = c = 0$ we have that $\theta = \pi$.
+    Hence by Rodrigues formula we have that
+    \begin{align*}
+        e^A &= \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+        + 0 \cdot \begin{pmatrix}
+            0 & 0 & 0\\
+            0 & 0 & -1\\
+            0 & 1 & 0
+        \end{pmatrix}
+        + \frac{2}{\pi^2} \cdot \begin{pmatrix}
+            0 & 0 & 0\\
+            0 & 0 & -1\\
+            0 & 1 & 0
+        \end{pmatrix}^2\\
+        &= \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+        + \frac{2}{\pi^2} \cdot \begin{pmatrix}
+            0 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & -1
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & \frac{\pi^2 - 2}{\pi^2} & 0\\
+            0 & 0 & \frac{\pi^2 - 2}{\pi^2}
+        \end{pmatrix}  
+    \end{align*}
+    In the case of $B$ we have that $b = \pi$ and $a = c = 0$, hence
+    $\theta = \pi$ then
+    \begin{align*}
+        e^B &= \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+        + 0 \cdot \begin{pmatrix}
+            0 & 0 & 1\\
+            0 & 0 & 0\\
+            -1 & 0 & 0
+        \end{pmatrix}
+        + \frac{2}{\pi^2} \cdot \begin{pmatrix}
+            0 & 0 & 1\\
+            0 & 0 & 0\\
+            -1 & 0 & 0
+        \end{pmatrix}^2\\
+        &= \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+        + \frac{2}{\pi^2} \cdot \begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & 0 & 0\\
+            0 & 0 & -1
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            \frac{\pi^2 - 2}{\pi^2} & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & \frac{\pi^2 - 2}{\pi^2}
+        \end{pmatrix}        
+    \end{align*}
+    Now, we compute $e^Ae^B$ as follows
+    \begin{align*}
+        e^Ae^B &= \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & \frac{\pi^2 - 2}{\pi^2} & 0\\
+            0 & 0 & \frac{\pi^2 - 2}{\pi^2}
+        \end{pmatrix}\begin{pmatrix}
+            \frac{\pi^2 - 2}{\pi^2} & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & \frac{\pi^2 - 2}{\pi^2}
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            \frac{\pi^2 - 2}{\pi^2} & 0 & 0\\
+            0 & \frac{\pi^2 - 2}{\pi^2} & 0\\
+            0 & 0 & \big(\frac{\pi^2 - 2}{\pi^2}\big)^2
+        \end{pmatrix}
+    \end{align*}
+    Finally, we compute $e^{A + B}$ using Rodrigues formula as well since the
+    matrix $A + B$ is skew symmetric as we want, where $a = b = \pi$ and $c = 0$
+    then we have that $\theta = \sqrt{2}\pi$ and hence
+    \begin{align*}
+        e^{A + B} &= \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+        + \frac{\sin(\sqrt{2}\pi)}{\sqrt{2}}\begin{pmatrix}
+            0 & 0 & 1\\
+            0 & 0 & -1\\
+            -1 & 1 & 0
+        \end{pmatrix}
+        + \frac{1 - \cos(\sqrt{2}\pi)}{2}\begin{pmatrix}
+            0 & 0 & 1\\
+            0 & 0 & -1\\
+            -1 & 1 & 0
+        \end{pmatrix}^2\\
+        e^{A + B} &= \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+        + \frac{\sin(\sqrt{2}\pi)}{\sqrt{2}}\begin{pmatrix}
+            0 & 0 & 1\\
+            0 & 0 & -1\\
+            -1 & 1 & 0
+        \end{pmatrix}
+        + \frac{1 - \cos(\sqrt{2}\pi)}{2}\begin{pmatrix}
+            -1 & 1 & 0\\
+            1 & -1 & 0\\
+            0 & 0 & -2
+        \end{pmatrix}\\
+        e^{A + B} &= \begin{pmatrix}
+            1-\frac{1 - \cos(\sqrt{2}\pi)}{2} &
+            \frac{1 - \cos(\sqrt{2}\pi)}{2} &
+            \frac{\sin(\sqrt{2}\pi)}{\sqrt{2}}\\
+            \frac{1 - \cos(\sqrt{2}\pi)}{2} &
+            1 -\frac{1 - \cos(\sqrt{2}\pi)}{2} &
+            -\frac{\sin(\sqrt{2}\pi)}{\sqrt{2}}\\
+            -\frac{\sin(\sqrt{2}\pi)}{\sqrt{2}} &
+            \frac{\sin(\sqrt{2}\pi)}{\sqrt{2}} &
+            \cos(\sqrt{2}\pi)
+        \end{pmatrix}
+    \end{align*}
+    Therefore we see that $e^Ae^B \neq e^{A + B}$.
+
+    \item [(c)] Let the following matrices
+    \begin{align*}
+        A = \begin{pmatrix} 2\pi i & 0\\ 0 & 0 \end{pmatrix}
+        \quad
+        B = \begin{pmatrix} 2\pi i & 1\\ 0 & 0 \end{pmatrix}
+    \end{align*}
+    We see that 
+    \begin{align*}
+        AB &= \begin{pmatrix} 2\pi i & 0\\ 0 & 0 \end{pmatrix}
+        \cdot \begin{pmatrix} 2\pi i & 1\\ 0 & 0 \end{pmatrix}
+        = \begin{pmatrix} -4\pi^2 & 2\pi i\\ 0 & 0 \end{pmatrix}\\
+        BA &= \begin{pmatrix} 2\pi i & 1\\ 0 & 0 \end{pmatrix}
+        \cdot \begin{pmatrix} 2\pi i & 0\\ 0 & 0 \end{pmatrix}
+        = \begin{pmatrix} -4\pi^2 &  0\\ 0 & 0 \end{pmatrix}
+    \end{align*}
+    Hence $AB \neq BA$.
+
+    Now, we need to compute $e^A$ so first we compute $A^2, A^3, ...$ as follows
+    \begin{align*}
+        A^2 = \begin{pmatrix} 2\pi i & 0\\ 0 & 0 \end{pmatrix}^2
+        = \begin{pmatrix} -4\pi^2 &  0\\ 0 & 0 \end{pmatrix}\\
+        A^3 = \begin{pmatrix} 2\pi i & 0\\ 0 & 0 \end{pmatrix}^3
+        = \begin{pmatrix} -8i\pi^3 &  0\\ 0 & 0 \end{pmatrix}
+    \end{align*}
+    So we see that
+    \begin{align*}
+        A^n = (2\pi i)^{n}\begin{pmatrix} 1 & 0\\ 0 & 0 \end{pmatrix}
+        = (2\pi i)^{n}J_A
+    \end{align*}
+    Where
+    $$J_A = \begin{pmatrix} 1 & 0\\ 0 & 0 \end{pmatrix}$$
+    Hence
+    \begin{align*}
+        e^A &= I_2 + \bigg((2\pi i)J_A + \frac{(2\pi i)^2}{2!}J_A
+        + \frac{(2\pi i)^3}{3!}J_A + \frac{(2\pi i)^4}{4!}J_A + ...\bigg)\\
+        &= I_2 + \sum_{n=1}^\infty \frac{(2\pi i)^n}{n!}J_A\\
+        &= I_2
+    \end{align*}
+    To compute $e^B$ we follow the same path, we see that 
+    \begin{align*}
+        B^2 &= \begin{pmatrix} 2\pi i & 1\\ 0 & 0 \end{pmatrix}^2
+        = \begin{pmatrix} -4\pi^2 &  2\pi i\\ 0 & 0 \end{pmatrix}\\
+        B^3 &= \begin{pmatrix} 2\pi i & 1\\ 0 & 0 \end{pmatrix}^3
+        = \begin{pmatrix} -8i\pi^3 & -4\pi^2\\ 0 & 0 \end{pmatrix}
+    \end{align*}
+    So
+    \begin{align*}
+        B^n = (2\pi i)^{n}\begin{pmatrix} 1 & 1/(2\pi i)\\ 0 & 0 \end{pmatrix}
+        = (2\pi i)^{n}J_B
+    \end{align*}
+    Where
+    $$J_B = \begin{pmatrix} 1 & 1/(2\pi i)\\ 0 & 0 \end{pmatrix}$$
+    Hence
+    \begin{align*}
+        e^B &= I_2 + \bigg((2\pi i)J_B + \frac{(2\pi i)^2}{2!}J_B 
+        + \frac{(2\pi i)^3}{3!}J_B + \frac{(2\pi i)^4}{4!}J_B +...\bigg)\\
+        &= I_2 + \sum_{n=1}^\infty \frac{(2\pi i)^n}{n!}J_B\\
+        &= I_2
+    \end{align*}
+    Therefore 
+    \begin{align*}
+        e^Ae^B &= I_2 \cdot I_2
+        = \begin{pmatrix} 1 & 0\\ 0 & 1 \end{pmatrix}
+    \end{align*}
+    But also we have that 
+    \begin{align*}
+        A + B &= \begin{pmatrix} 4\pi i & 1\\ 0 & 0 \end{pmatrix}\\
+        (A + B)^2 &= \begin{pmatrix} 4\pi i & 1\\ 0 & 0 \end{pmatrix}^2
+        = \begin{pmatrix} -16\pi^2 & 4\pi i\\ 0 & 0 \end{pmatrix}\\
+        (A + B)^3 &= \begin{pmatrix} 4\pi i & 1\\ 0 & 0 \end{pmatrix}^3
+        = \begin{pmatrix} -64\pi^3 i & -16\pi^2\\ 0 & 0 \end{pmatrix}
+    \end{align*}
+    So we see that
+    \begin{align*}
+        (A + B)^n = (4\pi i)^{n}\begin{pmatrix} 1 & 1/(4\pi i)\\ 0 & 0\end{pmatrix}
+        = (4\pi i)^{n}J_{A + B}
+    \end{align*}
+    Where
+    $$J_{A+B} = \begin{pmatrix} 1 & 1/(4\pi i)\\ 0 & 0 \end{pmatrix}$$
+    Hence 
+    \begin{align*}
+        e^{A + B} &= I_2 + \bigg((4\pi i) J_{A+B}+ \frac{(4\pi i)^2}{2!}J_{A+B}
+        + \frac{(4\pi i)^3}{3!}J_{A+B} + \frac{(4\pi i)^4}{4!}J_{A+B} +...\bigg)\\
+        &= I_2 + \sum_{n=1}^\infty \frac{(4\pi i)^n}{n!}J_{A+B}\\
+        &= I_2
+    \end{align*}
+    Therefore we obtain that $e^Ae^B = e^{A+B}$.
+\end{itemize}
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Hubbard: Problem 1.5.10}}
+\begin{itemize}
+    \item[a.] Let 
+    \begin{align*}
+        e^A = \sum_{k=0}^\infty \frac{A^k}{k!} = I + A + \frac{1}{2}A^2 +
+        \frac{1}{3!}A^3 + ...
+    \end{align*}
+    Because of Proposition 2.1 from Gallier we know that the series is
+    absolutely convergent this implies that the original series is convergent
+    as well.
+
+    Also, it is shown that the series $|e^A|$ is bounded by the following
+    series 
+    \begin{align*}
+        e^{n\mu} = \sum_{k=0}^\infty \frac{(n\mu)^k}{k!}
+    \end{align*}
+    where $\mu = \max\{|a_{ij}|: 1 \leq i,j \leq n\}$ and $A = (a_{ij})$.
+
+    \item[b.]
+    \begin{itemize}
+        \item [i.] Let
+        \begin{align*}
+            A = \begin{bmatrix} a & 0 \\ 0 & b \end{bmatrix}
+        \end{align*}
+        Then 
+        \begin{align*}
+            &A^2 = \begin{bmatrix} a & 0 \\ 0 & b \end{bmatrix}^2
+            = \begin{bmatrix} a^2 & 0 \\ 0 & b^2 \end{bmatrix}\\
+            &A^3 = \begin{bmatrix} a & 0 \\ 0 & b \end{bmatrix}^3
+            = \begin{bmatrix} a^3 & 0 \\ 0 & b^3 \end{bmatrix}\\
+            &\dots\\
+            &A^k = \begin{bmatrix} a & 0 \\ 0 & b \end{bmatrix}^k
+            = \begin{bmatrix} a^k & 0 \\ 0 & b^k \end{bmatrix}
+        \end{align*}
+        So we have that
+        \begin{align*}
+            e^A = \sum_{k=0}^\infty \frac{1}{k!}
+            \begin{bmatrix} a^k & 0 \\ 0 & b^k \end{bmatrix}
+            =\begin{bmatrix} \sum_{k=0}^\infty \frac{a^k}{k!} & 0 \\
+            0 & \sum_{k=0}^\infty \frac{b^k}{k!} \end{bmatrix}
+            =\begin{bmatrix} e^a & 0 \\ 0 & e^b \end{bmatrix}
+        \end{align*}
+        \item [ii.] Let
+        \begin{align*}
+            A = \begin{bmatrix} 0 & a \\ 0 & 0 \end{bmatrix}
+        \end{align*}
+        In this case, the matrix has a null trace so according to
+        Gallier we can compute $e^A$ as follows
+        \begin{align*}
+            e^A = I_2 + A = \begin{bmatrix} 1 & a \\ 0 & 1 \end{bmatrix}
+        \end{align*}
+        \item [iii.] Let 
+        \begin{align*}
+            A = \begin{bmatrix} 0 & a \\ -a & 0 \end{bmatrix}
+            = -a\begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}
+        \end{align*}
+        Then from Gallier we know that
+        \begin{align*}
+            e^A = \begin{bmatrix} \cos(-a) & -\sin(-a) \\
+            \sin(-a) & \cos(-a) \end{bmatrix}
+            = \begin{bmatrix} \cos a & \sin a \\
+            -\sin a & \cos a \end{bmatrix}
+        \end{align*}
+    \end{itemize}
+
+    \item[c.]
+    \begin{itemize}
+        \item [1.] Let
+        \begin{align*}
+            A = \begin{bmatrix} 0 & a\\ 0 & 0 \end{bmatrix}
+            \quad\quad
+            B = \begin{bmatrix} 0 & 0\\ b & 0 \end{bmatrix}            
+        \end{align*}
+        Such that $a, b > 0$. Then
+        \begin{align*}
+            e^A = \begin{bmatrix} 1 & a\\ 0 & 1 \end{bmatrix}
+            \quad\quad
+            e^B = \begin{bmatrix} 1 & 0\\ b & 1 \end{bmatrix}
+        \end{align*}
+        Because they are null trace matrices. So
+        \begin{align*}
+            e^Ae^B = \begin{bmatrix} 1 & a\\ 0 & 1 \end{bmatrix}
+            \cdot \begin{bmatrix} 1 & 0\\ b & 1 \end{bmatrix}
+            = \begin{bmatrix} 1 + ab & a\\ b & 1 \end{bmatrix}
+        \end{align*}
+        But 
+        \begin{align*}
+            A+B = \begin{bmatrix} 0 & a\\ b & 0 \end{bmatrix}
+        \end{align*}
+        Hence by what we saw on Gallier we get that
+        \begin{align*}
+            e^{A+B} &= \cosh(\sqrt{ab}) I_2 + \frac{\sinh(\sqrt{ab})}{\sqrt{ab}}(A + B)\\
+            &= \begin{bmatrix} \cosh(\sqrt{ab}) & 0\\ 0 & \cosh(\sqrt{ab}) \end{bmatrix}
+            + \begin{bmatrix} 0 & \frac{a\sinh(\sqrt{ab})}{\sqrt{ab}}\\
+            \frac{b\sinh(\sqrt{ab})}{\sqrt{ab}} & 0 \end{bmatrix}\\
+            &= \begin{bmatrix} \cosh(\sqrt{ab}) & \frac{a\sinh(\sqrt{ab})}{\sqrt{ab}}\\
+            \frac{b\sinh(\sqrt{ab})}{\sqrt{ab}} & \cosh(\sqrt{ab}) \end{bmatrix}
+        \end{align*}
+        Therefore $e^{A + B} \neq e^Ae^B$.
+        \item [2.] We proved this on Gallier Proposition 2.5. 
+        \item [3.] Let $A$ be an $n \times n$ matrix. Using the sub-problem
+        number 2 and given that $A$ commutes with itself we have that
+        \begin{align*}
+            e^{A + A} &= e^Ae^A
+        \end{align*}
+        i.e.
+        \begin{align*}
+            e^{2A} &= (e^A)^2
+        \end{align*}
+    \end{itemize}
+\end{itemize}
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Hall: 2.6.3}}
+    Let $A(t)$ and $B(t)$ be two smooth matrix-valued functions then by
+    definition we have that
+    \begin{align*}
+        \frac{d}{dt}[A(t)B(t)] &= \lim_{h\to 0}\frac{A(t+h)B(t+h) - A(t)B(t)}{h}\\
+            &= \lim_{h\to 0}\frac{A(t+h)B(t+h) - A(t)B(t) + A(t)B(t+h) - A(t)B(t+h)}{h}\\
+            &= \lim_{h\to 0}\frac{B(t+h)(A(t+h) - A(t)) + A(t)(B(t+h) - B(t))}{h}\\
+            &= \lim_{h\to 0}\frac{B(t+h)(A(t+h) - A(t))}{h}
+            + \lim_{h\to 0}\frac{A(t)(B(t+h) - B(t))}{h}\\
+            &= B(t)\frac{dA}{dt} + A(t)\frac{dB}{dt}
+    \end{align*}
+    Now we want to prove that $A(t)B(t)$ is smooth, we see that the element
+    $jk$ of $A(t)B(t)$ is given by
+    \begin{align*}
+        (A(t)B(t))_{jk} &= \sum_{i=0}^n A_{ji}(t)B_{ik}(t)
+    \end{align*}
+    Given that $A_{ji}(t)$ and $B_{ik}(t)$ are smooth functions from $\R$ to
+    $\R$ then the product $A_{ji}(t)B_{ik}(t)$ is smooth and the sum of smooth
+    functions is also smooth. Hence $(A(t)B(t))_{jk}$ is smooth and therefore
+    $A(t)B(t)$ is smooth. 
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Hall: 2.6.4}}
+    Let $A$ be an $n \times n$ complex matrix. If $A$ is diagonalizable then
+    we have that $\lim_{m \to \infty} A = A$ and hence we are done.
+
+    Suppose $A$ is not diagonalizable, then we know it's similar to an upper
+    triangular matrix $U$ i.e.
+    \begin{align*}
+        A = P U P^{-1}
+    \end{align*}
+    Then $U$ has the form
+    \begin{align*}
+        U = \begin{bmatrix}
+            u_{11} & u_{12} & \dots & u_{1n}\\
+            0 & u_{22} & \dots & u_{2n}\\
+            \vdots & \vdots & \dots & \vdots\\
+            0 & 0 & \dots & u_{nn}\\
+        \end{bmatrix}
+    \end{align*}
+    Where $u_{11}, u_{22}, \dots, u_{nn}$ are the eigenvalues of $U$. Given
+    that $A$ is not diagonalizable then $U$ is not diagonalizable then 
+    one or more eigenvalues are equal. Suppose we modify the eigenvalues
+    of $U$ as follows, we take $u_{22}$ if it's equal to $u_{11}$ we modify it
+    as $u_{22} - 1/m$ then we take $u_{33}$ if it's equal to $u_{11}$ or
+    $u_{22}$ we modify it as $u_{33} - 2/m$ and we continue this process until
+    $u_{nn}$. In the worst case, where all the eigenvalues are equal we
+    end up with a matrix $U_m$ as follows
+    \begin{align*}
+        U_m = \begin{bmatrix}
+            u_{11} & u_{12} & \dots & u_{1n}\\
+            0 & u_{22} - \frac{1}{m} & \dots & u_{2n}\\
+            \vdots & \vdots & \dots & \vdots\\
+            0 & 0 & \dots & u_{nn} - \frac{n-1}{m}\\
+        \end{bmatrix}
+    \end{align*}
+    We see that $U_m$ for any $m \in \N$ will be diagonalizable but also we see
+    that $\lim_{m \to \infty} U_m = U$ hence
+    \begin{align*}
+        \lim_{m \to \infty} P U_m P^{-1} = P U P^{-1} = A
+    \end{align*}
+    Therefore $A$ is the limit of a sequence of diagonalizable matrices.
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Hall: 2.6.5}}
+    Let $a \neq d$ then
+    \begin{align*}
+        \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}^2
+        &= \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}
+        \cdot \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}\\
+        &= \begin{pmatrix} a^2 & ab + bd\\ 0 & d^2 \end{pmatrix}\\
+        &= \begin{pmatrix} a^2 & b(a + d)\frac{a - d}{a - d}\\ 0 & d^2 \end{pmatrix}\\
+        &= \begin{pmatrix} a^2 & b\frac{a^2 - d^2}{a - d}\\ 0 & d^2 \end{pmatrix}
+    \end{align*}
+    Also, we see that
+    \begin{align*}
+        \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}^3
+        &= \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}^2
+        \cdot \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}\\
+        &= \begin{pmatrix} a^2 & b\frac{a^2 - d^2}{a - d}\\ 0 & d^2 \end{pmatrix}
+        \cdot \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}\\
+        &= \begin{pmatrix} a^3 & a^2b + bd\frac{a^2 - d^2}{a - d}\\ 0 & d^3\end{pmatrix}\\
+        &= \begin{pmatrix}
+            a^3 & b\frac{a^2(a - d) + da^2 - d^3}{a - d}\\ 0 & d^3
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            a^3 & b\frac{a^3 - d^3}{a - d}\\ 0 & d^3
+        \end{pmatrix}
+    \end{align*}
+    We can continue this process $m$ times so we can write that
+    \begin{align*}
+        \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}^m
+        &= \begin{pmatrix}
+            a^m & b\frac{a^m - d^m}{a - d}\\ 0 & d^m
+        \end{pmatrix}
+    \end{align*}
+    Now we compute $\exp\begin{pmatrix} a & b\\ 0 & d\end{pmatrix}$ as follows
+    \begin{align*}
+        \exp\begin{pmatrix} a & b\\ 0 & d\end{pmatrix}
+        &= \sum_{k = 0}^\infty\frac{1}{k!}
+        \begin{pmatrix} a & b\\ 0 & d \end{pmatrix}^k\\
+        &= \sum_{k=0}^\infty\frac{1}{k!}
+        \begin{pmatrix} a^k & b\frac{a^k - d^k}{a - d}\\ 0 & d^k\end{pmatrix}\\
+        &= \begin{pmatrix}
+            \sum_{k=0}^\infty\frac{1}{k!} a^k &
+            \frac{b}{a - d}\sum_{k=0}^\infty\frac{1}{k!}(a^k - d^k)\\
+            0 & \sum_{k=0}^\infty\frac{1}{k!} d^k
+        \end{pmatrix}\\
+        &= \begin{pmatrix}e^a & b\frac{e^a - e^d}{a - d}\\ 0 & e^d\end{pmatrix}\\
+    \end{align*}
+    On the other hand, in the case $a = d$ we have that 
+    \begin{align*}
+        \begin{pmatrix} a & b\\ 0 & a \end{pmatrix}^2
+        &= \begin{pmatrix} a & b\\ 0 & a \end{pmatrix}
+        \cdot \begin{pmatrix} a & b\\ 0 & a \end{pmatrix}
+        = \begin{pmatrix} a^2 & 2ab\\ 0 & a^2 \end{pmatrix}
+    \end{align*}
+    And that 
+    \begin{align*}
+        \begin{pmatrix} a & b\\ 0 & a \end{pmatrix}^3
+        = \begin{pmatrix} a^2 & 2ab\\ 0 & a^2 \end{pmatrix}
+        \cdot \begin{pmatrix} a & b\\ 0 & a \end{pmatrix}
+        = \begin{pmatrix} a^3 & 3a^2b\\ 0 & a^3\end{pmatrix}
+    \end{align*}
+    So we can write that
+    \begin{align*}
+        \begin{pmatrix} a & b\\ 0 & a \end{pmatrix}^k
+        &= \begin{pmatrix} a^k & ka^{k-1}b\\ 0 & a^k\end{pmatrix}
+    \end{align*}
+    Then $\exp\begin{pmatrix} a & b\\ 0 & a\end{pmatrix}$ in this case gives us
+    \begin{align*}
+        \exp\begin{pmatrix} a & b\\ 0 & a\end{pmatrix}
+        &= \sum_{k=0}^\infty\frac{1}{k!}
+        \begin{pmatrix} a^k & ka^{k-1}b\\ 0 & a^k\end{pmatrix}\\
+        &= \begin{pmatrix}
+            \sum_{k=0}^\infty\frac{1}{k!} a^k &
+            b\sum_{k=0}^\infty\frac{ka^{k-1}}{k!}\\
+            0 & \sum_{k=0}^\infty\frac{1}{k!} a^k
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            \sum_{k=0}^\infty\frac{1}{k!} a^k &
+            b\sum_{k=0}^\infty\frac{a^{k-1}}{(k - 1)!}\\
+            0 & \sum_{k=0}^\infty\frac{1}{k!} a^k
+        \end{pmatrix}\\
+        &= \begin{pmatrix}e^a & be^a\\ 0 & e^a\end{pmatrix}
+    \end{align*}
+    Which also matches with the equation we determined before assuming that
+    \begin{align*}
+        \lim_{a\to d}\frac{e^a - e^d}{a - d} = e^a
+    \end{align*}
+    Therefore for any $a,b,d \in \C$ we have that
+    \begin{align*}
+        \exp\begin{pmatrix} a & b\\ 0 & d\end{pmatrix}
+        &= \begin{pmatrix}e^a & b\frac{e^a - e^d}{a - d}\\ 0 & e^d\end{pmatrix}
+    \end{align*}
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Hall: 2.6.6}}
+    From Gallier we know that if a matrix $X$ has null trace then $X$ has the
+    form
+    \begin{align*}
+        X = \begin{pmatrix}a & b \\ c & -a\end{pmatrix}
+    \end{align*}
+    And we saw that these matrices satisfy that
+    \begin{align*}
+        X^2 = (a^2 + bc)I = -\det(X)I
+    \end{align*}
+    We saw that if $a^2 + bc = -\det(X) = 0$ then
+    \begin{align*}
+        e^X = I + X
+    \end{align*}
+    which matches with the equation
+    \begin{align*}
+        e^X = \cos(\sqrt{\det{x}})I + \frac{\sin(\sqrt{\det{X}})}{\sqrt{\det{X}}}X
+    \end{align*}
+    Where we used that $\cos(0) = 1$ and $\lim_{\theta \to 0} \sin\theta/\theta = 1$.\\
+    Also, we know that if $a^2 + bc = -\det(X) < 0$ then
+    \begin{align*}
+        e^X = \cos(\sqrt{\det{X}})I + \frac{\sin(\sqrt{\det{X}})}{\sqrt{\det{X}}}X
+    \end{align*}
+    which is the equation we have.\\
+    Finally, if $a^2 + bc = -\det(X) > 0$ i.e. $\sqrt{\det(X)}$ is complex by
+    Gallier we know that
+    \begin{align*}
+        e^X &= \cosh(\sqrt{\det{x}})I + \frac{\sinh(\sqrt{\det{X}})}{\sqrt{\det{X}}}X\\
+        &= \cos(\sqrt{\det{x}})I + \frac{i\sin(\sqrt{\det{X}})}{\sqrt{\det{X}}}X
+    \end{align*}
+    So for any value of $\det(X)$ the exponential of $X$ is given by the
+    equation mentioned above.\\
+    Let
+    \begin{align*}
+        X_1 = \begin{pmatrix}0 & -a\\ a & 0\end{pmatrix}
+    \end{align*}
+    Then given that $\det(X) = a^2$ we have that
+    \begin{align*}
+    e^{X_1} &= \cos a\begin{pmatrix}1 & 0\\ 0 & 1\end{pmatrix}
+    + \frac{\sin a}{a}\begin{pmatrix}0 & -a\\ a & 0\end{pmatrix}\\
+    &= \begin{pmatrix}\cos a & 0\\ 0 & \cos a\end{pmatrix}
+    + \begin{pmatrix}0 & -\sin a\\ \sin a & 0\end{pmatrix}\\
+    &= \begin{pmatrix}\cos a & -\sin a\\ \sin a & \cos a\end{pmatrix}
+\end{align*}
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Hall: 2.6.7}}
+    Let 
+    \begin{align*}
+        X = \begin{pmatrix} 4 & 3\\ -1 & 2 \end{pmatrix}
+    \end{align*}
+    Then we can write $X$ as $X = A + B$ where
+    \begin{align*}
+        A = \begin{pmatrix}
+            3 & 0\\ 0 & 3
+        \end{pmatrix}
+        \qquad
+        B = \begin{pmatrix}
+            1 & 3\\ -1 & -1
+        \end{pmatrix}
+    \end{align*}
+    We see that they commute cause $A$ can be written as $A = 3I_2$ and $I_2$
+    commutes with every matrix then we can compute $e^X$ as follows
+    \begin{align*}
+        e^X = e^{A + B} = e^{A}e^{B}
+    \end{align*}
+    First, we need to compute $e^A$
+    \begin{align*}
+        e^A = \sum_{k \geq 0} \frac{(3I_2)^k}{k!}
+        = I_2 \sum_{k \geq 0} \frac{3^k}{k!}
+        = e^3 I_2
+    \end{align*}
+    Now, we compute $e^B$ by using what we have from problem 2.6.6 since $B$
+    has $tr(B) = 0$ and $\det(B) = 2$ we have that
+    \begin{align*}
+        e^B &= \cos(\sqrt{\det{B}})I_2 + \frac{\sin(\sqrt{\det{B}})}{\sqrt{\det{B}}}B\\
+        &= \cos(\sqrt{2})I_2 + \frac{\sin(\sqrt{2})}{\sqrt{2}}B
+    \end{align*}
+    Finally we have that
+    \begin{align*}
+        e^X &= e^Ae^B\\
+        &= (e^3I_2)(\cos(\sqrt{2})I_2 + \frac{\sin(\sqrt{2})}{\sqrt{2}}B)\\
+        &= e^3\cos(\sqrt{2})I_2 + e^3\frac{\sin(\sqrt{2})}{\sqrt{2}}B\\
+        &= \begin{pmatrix}
+            e^3(\cos(\sqrt{2}) + \frac{\sin(\sqrt{2})}{\sqrt{2}})
+            & 3e^3\frac{\sin(\sqrt{2})}{\sqrt{2}}\\
+            -e^3\frac{\sin(\sqrt{2})}{\sqrt{2}}
+            & e^3(\cos(\sqrt{2}) - \frac{\sin(\sqrt{2})}{\sqrt{2}})
+        \end{pmatrix}
+    \end{align*}
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Hall: 2.6.9}}
+\begin{itemize}
+\item [(a)] Let $A$ be unipotent then $A - I$ is nilpotent hence there is
+$k \in \N$ such that $(A - I)^k = 0$.
+Also, by definition we know that
+\begin{align*}
+    \log A =\sum_{m=1}^\infty (-1)^{m+1}\frac{(A - I)^m}{m}
+\end{align*}
+Then we can write that
+\begin{align*}
+    \log A = (A - I) - \frac{(A - I)^2}{2} + \frac{(A - I)^3}{3}
+    - ... + (-1)^{k+1}\frac{(A - I)^k}{k}
+\end{align*}
+If we compute $(\log A)^2$ the smallest power of $A -I$ is $(A - I)^2$ but also
+we get $A-I$ powered to $k +1$, $k+2$, ..., $2k$ which are all zero cause $A-I$
+is nilpotent. Then if we compute $(\log A)^k$ the smallest power of $A -I$ is
+going to be $(A - I)^k$ which is zero. Therefore $(\log A)^k = 0$ and hence
+$\log A$ is nilpotent.
+\item [(b)] Let $X$ be nilpotent then there is $k \in \N$ such that $X^k = 0$.
+Also, by definition we know that
+\begin{align*}
+    e^X = \sum_{m=0}^\infty \frac{X^m}{m!}
+\end{align*}
+But since $X$ is nilpotent we can write that
+\begin{align*}
+    e^X &= \sum_{m=0}^k \frac{X^m}{m!}\\
+    &= I + X + \frac{X^2}{2} + ... + \frac{X^k}{k!}
+\end{align*}
+Then $e^X - I$ is
+\begin{align*}
+    e^X - I &= X + \frac{X^2}{2} + ... + \frac{X^k}{k!}
+\end{align*}
+If we compute $(e^X - I)^2$ the smallest power of $X$ is $X^2$ but also
+we get $X$ powered to $k +1$, $k+2$, ..., $2k$ which are all zero cause $X$
+is nilpotent. Then if we compute $(e^X - I)^k$ the smallest power of $X$ is
+going to be $X^k$ which is zero. Therefore $(e^X - I)^k = 0$ and hence
+$e^X - I$ is nilpotent which implies that $e^X$ is unipotent.
+\cleardoublepage
+\item [(c)] Let $A(t) = I + t(A - I)$ be unipotent then $A(t) - I = t(A - I)$
+is nilpotent hence there is some $k \in \N$ for which $t^k(A - I)^k = 0$
+then
+\begin{align*}
+    \log(A(t)) = \sum_{m=1}^k (-1)^{m+1}\frac{t^m(A - I)^m}{m}
+\end{align*}
+From part (a) we know that $\log(A(t))$ is nilpotent so there is some $j \in \N$
+such that $(\log(A(t)))^j = 0$. Hence we can write that
+\begin{align*}
+    \exp(\log(A(t)))
+    &= I + \sum_{n=1}^j\frac{1}{n!}
+    \bigg(\sum_{m=1}^k (-1)^{m+1}\frac{t^m(A - I)^m}{m}\bigg)^n
+\end{align*}
+Then $\exp(\log(A(t)))$ depends polynomially on $t$ and for a sufficiently
+small $t$ we can get that $\|A(t) - I\| < 1$ then we can apply Theorem 2.8
+and therefore
+\begin{align*}
+    \exp(\log(A(t))) &= A(t)
+\end{align*}
+So we have proven that the polynomial $\exp(\log(A(t)))$ is equal to the
+polynomial $A(t)$ on an interval close to 0 then they must be equal. This
+implies that the result we got must be true for $t=1$ hence
+\begin{align*}
+    \exp(\log(A)) = \exp(\log(A(1))) &= I + 1(A -I) = A
+\end{align*}
+
+
+In the same way, let now $X(t) = tX$ be nilpotent then there is some
+$k \in \N$ such that $X(t)^k = (tX)^k = 0$ then 
+\begin{align*}
+    \exp(X(t)) = \sum_{m=0}^k \frac{t^mX^m}{m!}
+\end{align*}
+From part (b) we know that $\exp(X(t))$ is unipotent so there is some $j \in \N$
+such that $(\exp(X(t)) - I)^j = 0$. Hence we can write that
+\begin{align*}
+    \log(\exp(X(t)))
+    &= \sum_{n=1}^j\frac{(-1)^{n+1}}{n}
+    \bigg(\sum_{m=0}^k \frac{t^mX^m}{m!} -I\bigg)^n
+\end{align*}
+Again $\log(\exp(X(t)))$ depends polynomially on $t$ and for a sufficiently
+small $t$ we can get that $\|X(t)\| < \log 2$ and hence $\|e^X - I\| < 1$ then
+we can apply Theorem 2.8 and therefore
+\begin{align*}
+    \log(\exp(X(t))) &= X(t)
+\end{align*}
+Finally, again because the two polynomials are equal on an interval close to
+0 then must be that
+\begin{align*}
+    \log(\exp(X)) = \log(\exp(X(1))) &= 1X = X
+\end{align*}
+
+\end{itemize}
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Hall: 2.6.10}}
+    Let $A$ be an invertible $n \times n$ matrix then $A$ is similar to a
+    block-diagonal matrix $D$ where each block is of the form
+    $\lambda I + N_\lambda$ with $N_\lambda$ nilpotent. Then
+    \begin{align*}
+        A = PDP^{-1}
+    \end{align*}
+    for some invertible matrix $P$.
+    Let $D'$ be a matrix defined as
+    \begin{align*}
+        D' &= \begin{pmatrix}
+            \log(\lambda_1I(I + N_{\lambda_1}/\lambda_1)) & 0 & ... & 0 \\
+            0 & \log(\lambda_2I (I + N_{\lambda_2}/\lambda_2)) & ... & 0 \\
+            \vdots & \vdots & \vdots & \vdots\\
+            0 & 0 & ... & \log(\lambda_nI(I + N_{\lambda_n}/\lambda_n))
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            \log(\lambda_1I) + \log(I + N_{\lambda_1}/\lambda_1) & 0 & ... & 0 \\
+            0 & \log(\lambda_2I) + \log(I + N_{\lambda_2}/\lambda_2) & ... & 0 \\
+            \vdots & \vdots & \vdots & \vdots\\
+            0 & 0 & ... & \log(\lambda_nI)+ \log(I + N_{\lambda_n}/\lambda_n)
+        \end{pmatrix}
+    \end{align*}
+    Where we used that $\lambda_1I$ and $I + N_{\lambda_1}/\lambda_1$ commutes.
+    So
+    \begin{align*}
+        e^{D'} &= \begin{pmatrix}
+            \exp(\log(\lambda_1I) + \log(I + N_{\lambda_1}/\lambda_1)) & ... & 0 \\
+            0  & ... & 0 \\
+            \vdots & \vdots & \vdots\\
+            0 & ... & \exp(\log(\lambda_nI)+ \log(I + N_{\lambda_n}/\lambda_n))
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            \exp(\log(\lambda_1I))\exp(\log(I + N_{\lambda_1}/\lambda_1)) & ... & 0 \\
+            0  & ... & 0 \\
+            \vdots & \vdots & \vdots\\
+            0 & ... & \exp(\log(\lambda_nI)) \exp(\log(I + N_{\lambda_n}/\lambda_n))
+        \end{pmatrix}
+    \end{align*}
+    Since $I + N_{\lambda_i}/\lambda_i$ is unipotent we know that
+    $\exp(\log(I + N_{\lambda_i}/\lambda_i)) = I + N_{\lambda_i}/\lambda_i$.
+    And for $\exp(\log(\lambda_iI))$ we see that 
+    \begin{align*}
+        \exp(\log(\lambda_iI))
+        &= \exp\bigg(\sum_{m = 1}^\infty (-1)^{m+1} \frac{(\lambda_i I - I)^m}{m}\bigg)\\
+        &= \exp\bigg(\sum_{m = 1}^\infty (-1)^{m+1} \frac{(\lambda_i-1)^m}{m}~I\bigg)\\
+        &= \exp(\log(\lambda_i)I)\\
+        &= \sum_{m=0}^\infty \frac{(\log(\lambda_i)I)^m}{m!}\\
+        &= \sum_{m=0}^\infty \frac{\log(\lambda_i)^m}{m!}~I\\
+        &= \exp(\log(\lambda_i))I\\
+        &= \lambda_iI
+    \end{align*}
+    Then
+    \begin{align*}
+        e^{D'} &= \begin{pmatrix}
+            \lambda_1I(I + N_{\lambda_1}/\lambda_1) & 0 & ... & 0 \\
+            0 & \lambda_2I(I + N_{\lambda_2}/\lambda_2) & ... & 0 \\
+            \vdots & \vdots & \vdots & \vdots\\
+            0 & 0 & ... & \lambda_n I(I + N_{\lambda_n}/\lambda_n)
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            \lambda_1I + N_{\lambda_1} & 0 & ... & 0 \\
+            0 & \lambda_2I + N_{\lambda_2} & ... & 0 \\
+            \vdots & \vdots & \vdots & \vdots\\
+            0 & 0 & ... & \lambda_n I + N_{\lambda_n}
+        \end{pmatrix}
+    \end{align*}
+    Hence $D = e^{D'}$ and therefore
+    \begin{align*}
+        A = PDP^{-1} = Pe^{D'}P^{-1} = e^{PD'P^{-1}}
+    \end{align*}
+    Which implies that $A$ can be written as $A = e^{X}$ where $X = PD'P^{-1}$.
+
+\end{proof}
+
+\end{document}
