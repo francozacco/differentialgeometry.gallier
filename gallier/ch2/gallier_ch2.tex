@@ -36,8 +36,16 @@
 \newcommand{\Topo}{\mathcal{T}}
 \newcommand{\Or}{\text{ or }}
 \newcommand{\setmin}{\setminus}
+\newcommand{\tr}{\text{tr}}
+\newcommand{\End}{\text{End}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\dom}{\mathscrsfs{D}}
+\newcommand{\range}{\mathscrsfs{R}}
+\newcommand{\nullsp}{\mathscrsfs{N}}
 
 
+
+\DeclareSymbolFontAlphabet{\mathscrsfs}{rsfs}
 \theoremstyle{definition}
 \newtheorem*{solution*}{Solution}
 
@@ -48,7 +56,7 @@
 Solutions to selected problems on Differential Geometry and Lie Groups from
 different books, but mainly from Gallier.
 \section*{Chapter 2 - The Matrix Exponential: Some Matrix and Lie Groups}
-
+\subsection*{2.1 The Exponential Map}
 \begin{proof}{\textbf{Problem 2.1.}}
 \begin{itemize}
     \item [(a)] Let the following symmetric matrices
@@ -858,6 +866,870 @@ Finally, again because the two polynomials are equal on an interval close to
     \end{align*}
     Which implies that $A$ can be written as $A = e^{X}$ where $X = PD'P^{-1}$.
 
+\end{proof}
+\cleardoublepage
+\subsection*{2.2 The Lie Groups $\bm{GL}(n, \R)$, $\bm{SL}(n, \R)$, $\bm{O}(n)$,
+$\bm{SO}(n)$, the Lie Algebras $\mathfrak{gl}(n, \R)$, $\mathfrak{sl}(n, \R)$,
+$\mathfrak{o}(n)$, $\mathfrak{so}(n)$, and the Exponential Map}
+\begin{proof}{\textbf{Problem 2.2.}}
+    Let
+    \begin{align*}
+        B = \begin{pmatrix}
+            a & b\\ c &-a
+        \end{pmatrix} \in \mathfrak{sl}(2, \C)
+    \end{align*}
+    also, let $\omega^2 = a^2 + bc$ such that $\omega \neq 0$.
+    We see that $B^2$ is
+    \begin{align*}
+        B^2 = \begin{pmatrix}a & b\\ c &-a \end{pmatrix}
+        \cdot \begin{pmatrix} a & b\\ c &-a \end{pmatrix}
+        = \begin{pmatrix} a^2 + bc & 0\\ 0 & a^2 +bc \end{pmatrix}
+        = (a^2 + bc)I_2
+    \end{align*}
+    Then
+    \begin{align*}
+        e^B &= I_2 + \frac{B}{1!} + \frac{\omega^2}{2!}I_2
+        + \frac{\omega^2}{3!}B + \frac{\omega^4}{4!}I_2 + \frac{\omega^4}{5!}B
+        + ...\\
+        &= \bigg(1 + \frac{\omega^2}{2!} + \frac{\omega^4}{4!} + ...\bigg)I_2
+        +  \bigg(1 + \frac{\omega^2}{3!} + \frac{\omega^4}{5!} + ...\bigg)B\\
+        &= \bigg(1 + \frac{\omega^2}{2!} + \frac{\omega^4}{4!} + ...\bigg)I_2
+        + \bigg(\omega + \frac{\omega^3}{3!} + \frac{\omega^5}{5!} + ...\bigg)
+        \frac{B}{\omega}\\
+        &= \cosh\omega I_2 + \frac{\sinh\omega}{\omega}B
+    \end{align*}
+    Suppose now that $\omega^2 = 0 = a^2 + bc$ then $B^2 = 0$ and hence
+    \begin{align*}
+        e^B &= I_2 + \frac{B}{1!} = I_2 + B
+    \end{align*}
+    Finally, suppose the matrix
+    \begin{align*}
+        \begin{pmatrix}-1 & 1\\ 0 & -1 \end{pmatrix}
+    \end{align*}
+    is the exponential of a matrix in $\mathfrak{sl}(2,\C)$, we want to arrive
+    to a contradiction. Then must be that
+    \begin{align*}
+        \exp\begin{pmatrix} a & b\\ c &-a \end{pmatrix}
+        = \begin{pmatrix}-1 & 1\\ 0 & -1 \end{pmatrix}
+    \end{align*}
+    If $\omega \neq 0$ where $\omega^2 = a^2 + bc$ then must be that
+    \begin{align*}
+        \begin{pmatrix}
+            \cosh\omega + \frac{\sinh\omega}{\omega}a & \frac{\sinh\omega}{\omega}b\\
+            \frac{\sinh\omega}{\omega}c & \cosh\omega - \frac{\sinh\omega}{\omega}a
+        \end{pmatrix}
+        = \begin{pmatrix}-1 & 1\\ 0 & -1 \end{pmatrix}
+    \end{align*}
+    Then $c = 0$, $b = \frac{\omega}{\sin\omega}$ and
+    \begin{align*}
+        \cosh\omega + \frac{a}{b} = -1\\
+        \cosh\omega - \frac{a}{b} = -1
+    \end{align*}
+    But there is no solution to these equations.
+    So there must be that $\omega = 0$ and hence
+    \begin{align*}
+        \begin{pmatrix} 1 + a & b\\ c & 1-a \end{pmatrix}
+        = \begin{pmatrix}-1 & 1\\ 0 & -1 \end{pmatrix}
+    \end{align*}
+    Then $c = 0$, $b = 1$ and
+    \begin{align*}
+        1 + a = -1\\
+        1 - a = -1
+    \end{align*}
+    But again there is no solution to these equations.\\
+    Therefore we arrived at a contradiction and must be that there is no
+    exponential matrix $A$ in $\mathfrak{sl}(2,\C)$ such that
+    \begin{align*}
+        e^A = \begin{pmatrix}-1 & 1\\ 0 & -1 \end{pmatrix}
+    \end{align*}
+    Which implies that the map $\exp: \mathfrak{sl}(2,\C) \to \bm{SL}(2,\C)$ is
+    not surjective.
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Problem 2.3.}}
+\begin{itemize}
+    \item [(a)] Let $B = \log(I - N)$. We see that $(I - N) - I = -N$ is
+    nilpotent, this implies that $I -N$ is unipotent then by the problem
+    "Hall: 2.6.9(c)" we know that $\exp(\log(I - N)) = I -N$ therefore
+    \begin{align*}
+        \exp(B) = \exp(\log(I - N)) = I - N = A
+    \end{align*}
+    \item [(b)] Let $A \in \bm{GL}(n, \C)$ then $A$ is a complex invertible
+    $n \times n$ matrix and by "Hall: 2.6.10" we know there is
+    $B \in \mathfrak{gl}(n, \C)$ such that $e^B = A$. Thus,
+    the exponential map $\exp :\mathfrak{gl}(n,\C)\to \bm{GL}(n,\C)$
+    is surjective.
+\end{itemize}
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Problem 2.4.}}
+\begin{itemize}
+    \item [(a)] Let 
+    \begin{align*}
+        A = \begin{pmatrix}
+            0 & -c & b\\
+            c & 0 & -a\\
+            -b & a & 0
+        \end{pmatrix} \in \mathfrak{so}(3)
+    \end{align*}
+    Then
+    \begin{align*}
+        A^2 &= \begin{pmatrix}
+            0 & -c & b\\
+            c & 0 & -a\\
+            -b & a & 0
+        \end{pmatrix}
+        \cdot \begin{pmatrix}
+            0 & -c & b\\
+            c & 0 & -a\\
+            -b & a & 0
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            -c^2 -b^2 & ba & ac\\
+            ba & -c^2-a^2 & bc\\
+            ac & bc & -b^2-a^2
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            a^2-a^2-b^2-c^2 & ba & ac\\
+            ba & b^2-a^2-b^2-c^2 & bc\\
+            ac & bc & c^2-a^2-b^2-c^2
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            -a^2-b^2-c^2 & 0 & 0\\
+            0 & -a^2-b^2-c^2 & 0\\
+            0 & 0 & -a^2-b^2-c^2
+        \end{pmatrix} + \begin{pmatrix}
+            a^2 & ba & ac\\
+            ba & b^2 & bc\\
+            ac & bc & c^2
+        \end{pmatrix}\\
+        &= (-a^2-b^2-c^2)I + B\\
+        &=-\theta^2I + B
+    \end{align*}
+    Where $\theta = \sqrt{a^2 + b^2 + c^2}$ and
+    \begin{align*}
+        B = \begin{pmatrix}
+            a^2 & ba & ac\\
+            ba & b^2 & bc\\
+            ac & bc & c^2
+        \end{pmatrix}
+    \end{align*}
+    On the other hand, we see that
+    \begin{align*}
+        AB &= \begin{pmatrix}
+            0 & -c & b\\
+            c & 0 & -a\\
+            -b & a & 0
+        \end{pmatrix}
+        \cdot \begin{pmatrix}
+            a^2 & ba & ac\\
+            ba & b^2 & bc\\
+            ac & bc & c^2
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            -abc + abc & -b^2c + b^2c & -bc^2 + bc^2\\
+            a^2c - a^2c & abc - abc & ac^2 - ac^2\\
+            -a^2b + a^2b & -ab^2 + ab^2 & -abc + abc
+        \end{pmatrix}\\
+        &= 0
+    \end{align*}
+    Also
+    \begin{align*}
+        BA &= \begin{pmatrix}
+            a^2 & ba & ac\\
+            ba & b^2 & bc\\
+            ac & bc & c^2
+        \end{pmatrix}
+        \cdot \begin{pmatrix}
+            0 & -c & b\\
+            c & 0 & -a\\
+            -b & a & 0
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            abc - abc & -a^2c + a^2c & ba^2 - ba^2\\
+            b^2c - b^2c & -abc + abc & ab^2 - ab^2\\
+            b^2c - b^2c & -ac^2 + ac^2 & abc - abc
+        \end{pmatrix}\\
+        &= 0
+    \end{align*}
+    Therefore $AB = BA = 0$. Finally, we compute $A^3$ as follows
+    \begin{align*}
+        A^3 = A(-\theta^2I + B) = -A\theta^2I + AB = -\theta^2A
+    \end{align*}
+    \item [(b)] This is proved in Proposition 2.7.
+    \item [(c)] Since $\det(e^A) = e^{\text{tr}(A)}$ and we see that
+    $\text{tr}(A) = 0$ then
+    $$\det(e^A) = e^0 = 1$$
+    On the other hand, we know that $(e^A)^T = e^{A^T}$ also, $A^T = -A$ and 
+    hence $A$ and $A^T$ commute then
+    \begin{align*}
+        (e^A)^T e^A = e^{A^T} e^A = e^{A^T + A} = e^{-A + A} = e^0 = I
+    \end{align*}
+    And 
+    \begin{align*}
+        e^A(e^A)^T = e^Ae^{A^T} = e^{A + A^T} = e^{A - A} = e^0 = I
+    \end{align*}
+    Therefore $e^A$ is an orthogonal matrix of determinant +1.
+    \item [(d)]
+    \begin{itemize}
+    \item [(2)] Let $R \in \mathbf{SO}(3)$ as
+    \begin{align*}
+        R = \begin{pmatrix}
+            \cos\phi & -\sin\phi & 0 \\
+            \sin\phi & \cos\phi & 0 \\
+            0 & 0 & 1 \\
+        \end{pmatrix}
+    \end{align*}
+    And let $B \in \mathfrak{so}(3)$
+    such that $B$ is of the form
+    \begin{align*}
+        B &= \left\{\frac{\theta}{2\sin\theta}(R - R^T)
+        ~:~1 + 2 \cos\theta = \tr(R)\right\}\\
+        &= \frac{\theta}{2\sin\theta}
+         \begin{pmatrix}
+            \cos\phi & -\sin\phi & 0 \\
+            \sin\phi & \cos\phi & 0 \\
+            0 & 0 & 1 \\
+        \end{pmatrix} - \begin{pmatrix}
+            \cos\phi & \sin\phi & 0 \\
+            -\sin\phi & \cos\phi & 0 \\
+            0 & 0 & 1 \\
+        \end{pmatrix}\\
+        &= \frac{\theta}{2\sin\theta}
+         \begin{pmatrix}
+            0 & -2\sin\phi & 0 \\
+            2\sin\phi & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix}
+    \end{align*}
+    Given that $1 + 2\cos\theta = \tr(R)$ we get that
+    $1 + 2\cos\theta = 2\cos\phi + 1$ hence $\theta = \phi$ then we write
+    $B$ as
+    \begin{align*}
+        B &= \begin{pmatrix}
+            0 & -\theta & 0 \\
+            \theta & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix}
+    \end{align*}
+    Then $B^2$ is
+    \begin{align*}
+        B^2 &= \begin{pmatrix}
+            0 & -\theta & 0 \\
+            \theta & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix}\cdot \begin{pmatrix}
+            0 & -\theta & 0 \\
+            \theta & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix} = \begin{pmatrix}
+            -\theta^2 & 0 & 0 \\
+            0 & -\theta^2 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix}
+    \end{align*}
+    So we compute $e^B$ as follows
+    \begin{align*}
+        e^B &= I_3 + \frac{\sin\theta}{\theta} B + \frac{(1 - \cos\theta)}{\theta^2}B^2\\
+        &= I_3 + \frac{\sin\theta}{\theta}\begin{pmatrix}
+            0 & -\theta & 0 \\
+            \theta & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix}
+        + \frac{(1 - \cos\theta)}{\theta^2}\begin{pmatrix}
+            -\theta^2 & 0 & 0 \\
+            0 & -\theta^2 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix}\\
+        &= I_3 + \begin{pmatrix}
+            0 & -\sin\theta & 0 \\
+            \sin\theta & 0 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix}
+        + \begin{pmatrix}
+            \cos\theta - 1 & 0 & 0 \\
+            0 & \cos\theta - 1 & 0 \\
+            0 & 0 & 0 \\
+        \end{pmatrix}\\
+        &=  \begin{pmatrix}
+            \cos\theta & -\sin\theta & 0 \\
+            \sin\theta & \cos\theta & 0 \\
+            0 & 0 & 1 \\
+        \end{pmatrix}
+    \end{align*}
+    Therefore we have proven that $e^B = R$.
+    \item [(3)] Let now $R \neq I$ and $\tr(R) = -1$ then from the trace
+    equation we see that 
+    \begin{align*}
+        2\cos\phi + 1 &= -1\\
+        \cos\phi + 1 &= 0\\
+        \phi &= \arccos(-1) = \pi
+    \end{align*}
+    We can compute the eigenvalues of $R$ from the characteristic polynomial
+    as follows
+    \begin{align*}
+        \det(R - \lambda I) = 0\\
+        \begin{vmatrix}
+            \cos\phi - \lambda & -\sin\phi & 0\\
+            \sin\phi & \cos\phi - \lambda & 0\\
+            0 & 0 & 1 - \lambda
+        \end{vmatrix} = 0\\
+        (1 - \lambda)(\cos\phi - \lambda)^2 + \sin^2\phi(1- \lambda) = 0\\
+        (1 - \lambda)(\cos^2\phi - 2\lambda\cos\phi + \lambda^2 + \sin^2\phi) = 0\\
+        (1 - \lambda)(\lambda^2 - 2\lambda\cos\phi + 1) = 0\\
+        (1 - \lambda)(\lambda^2 + 2\lambda + 1) = 0
+    \end{align*}
+    From the first factor we see that one eigenvalue of $R$ is $1$ and from the
+    second factor we have a double eigenvalue at $-1$.
+
+    Given that $\phi = \pi$ then $R$ becomes
+    \begin{align*}
+        R = \begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+    \end{align*}
+    Then we see that $R = R^T$ and also $R^2$ is
+    \begin{align*}
+        R^2 = \begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix} \cdot \begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+         = \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix} = I_3
+    \end{align*}
+\cleardoublepage
+    Let $S = \frac{1}{2}(R - I)$ then replacing $R$ and solving we get that
+    \begin{align*}
+        S = \frac{1}{2} \begin{pmatrix}
+            -2 & 0 & 0 \\
+            0 & -2 & 0\\
+            0 & 0 & 0
+        \end{pmatrix}
+        = \begin{pmatrix}
+            -1 & 0 & 0 \\
+            0 & -1 & 0\\
+            0 & 0 & 0
+        \end{pmatrix}
+    \end{align*}
+    So $S$ is symmetric and since it's a diagonal matrix the eigenvalues of $S$
+    are $-1, -1, 0$.
+
+    Suppose there is a skew symmetric matrix $U$ defined as follows
+    \begin{align*}
+        U = \begin{pmatrix}
+            0 & -d & c\\
+            d & 0 & -b\\
+            -c & b & 0
+        \end{pmatrix}
+    \end{align*}
+    Then $U^2$ is
+    \begin{align*}
+        U^2 &= \begin{pmatrix}
+            0 & -d & c\\
+            d & 0 & -b\\
+            -c & b & 0
+        \end{pmatrix}\cdot
+        \begin{pmatrix}
+            0 & -d & c\\
+            d & 0 & -b\\
+            -c & b & 0
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            -c^2-d^2 & bc & bd\\
+            bc & -b^2-d^2 & cd\\
+            bd & cd & -b^2 -c^2
+        \end{pmatrix}
+    \end{align*}
+    So if $b = c = 0$ and $d = -1$ we get that
+    \begin{align*}
+        U^2 &= \begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & 0
+        \end{pmatrix} = S
+    \end{align*}
+    If $U^2 = S$ then we see that $\tr(S) = -2$ then must be that
+    \begin{align*}
+        -c^2 - d^2 -b^2 - d^2 -b^2 - c^2 &= -2\\
+        -2b^2 -2c^2 -2d^2  &= -2\\
+        b^2 + c^2 + d^2  &= 1
+    \end{align*}
+\cleardoublepage
+    Finally, let
+    \begin{align*}
+        B = \left\{(2k + 1)\pi\begin{pmatrix}
+            0 & 1 & 0\\
+            -1 & 0 & 0\\
+            0 & 0 & 0
+        \end{pmatrix} : k\in \Z\right\}
+    \end{align*}
+    We want to prove that $e^B = R$ then
+    \begin{align*}
+        e^B &= I_3 + \frac{\sin\theta}{\theta} B + \frac{(1 - \cos\theta)}{\theta^2}B^2\\
+        &= I_3 + \frac{2}{\pi^2}B^2\\
+        &= I_3 + \frac{2}{\pi^2}(2k + 1)^2\pi^2\begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & 0
+        \end{pmatrix}\\
+        &= (2k + 1)^2\begin{pmatrix}
+            1-2 & 0 & 0\\
+            0 & 1-2 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}
+    \end{align*}
+    Where we took $k = 0$ in the last step.
+    \end{itemize}
+\end{itemize}
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Duistermaat: 2.4}}
+    Let $A \in \End(\R^n)$ be an orthogonal transformation i.e.
+    $\|Ax\| = \|x\|$ for all $x\in \R^n$
+    \begin{itemize}
+        \item [(i)] Let $Ax = 0$ then $\|Ax\| = 0$ but this implies that
+        $\|x\| = 0$ hence must be that $x = 0$. Then $A^{-1}$ exists.
+        
+        Now, let $x_1, x_2 \in \R^n$ and suppose $Ax_1 = Ax_2$ then
+        $A(x_1 - x_2) = 0$ since $A \in \End(\R^n)$ but this implies that
+        $x_1 - x_2 = 0$ by what we proved before then $x_1 = x_2$
+        and therefore $A$ is injective.
+
+        Given that $A:\R^n \to \R^n$ then $\dim(\dom(A)) = \dim(\range(A))= n$
+        hence $\dim(\nullsp(A)) = 0$ because of the rank-nullity theorem.
+        Also, given that $A^{-1}$ exists this implies that $\range(A) = \R^n$
+        i.e. $A$ is surjective.
+        
+        Therefore $A$ is bijective and hence $A \in \Aut(\R^n)$.
+
+        Finally, let us take $x = A^{-1}y$ then
+        $$\|Ax\| = \|AA^{-1}y\| = \|y\| = \|A^{-1}y\| = \|x\|$$
+        Therefore $A^{-1}$ is an orthogonal transformation.
+
+        \item [(ii)] Let us note first that
+        $\|Ax + Ay\| = \|A(x + y)\| = \|x + y\|$
+        then by the Polarization identity we have that
+        \begin{align*}
+            \langle Ax, Ay\rangle
+            &= \frac{1}{4}(\|Ax + Ay\|^2 - \|Ax - Ay\|^2)\\
+            &= \frac{1}{4}(\|x + y\|^2 - \|x - y\|^2)\\
+            &= \langle x, y\rangle
+        \end{align*}
+        On the other hand, let us name $Ax = z$ then by the adjoint linear
+        operator characteristic property we have that
+        \begin{align*}
+            \langle A^tz, y\rangle = \langle z, (A^t)^ty\rangle
+            = \langle z, Ay\rangle
+        \end{align*}
+        so replacing $z$ again we have that
+        \begin{align*}
+            \langle A^tAx, y\rangle = \langle Ax, Ay\rangle
+        \end{align*}
+        Therefore joining both results we see that
+        \begin{align*}
+            \langle A^tAx, y\rangle = \langle Ax, Ay\rangle = \langle x, y\rangle
+        \end{align*}
+\cleardoublepage
+        \item [(iii)] From the previous result we see that
+        \begin{align*}
+            \langle A^tAx - x, y\rangle = \langle A^tAx, y\rangle - \langle x, y\rangle = 0
+        \end{align*}
+        for all $x$ and $y$ in $\R^n$. So taking $y = A^tAx-x$ we see by the
+        Polarization identity that
+        \begin{align*}
+        \langle A^tAx - x, A^tAx - x\rangle = \|A^tA(x - x)\|^2 = 0
+        \end{align*}
+        Hence by the properties of the norm must be that 
+        \begin{align*}
+            A^tAx - x &= 0\\
+            A^tAx = x
+        \end{align*}
+        Therefore $A^tA = I$.
+        
+        By the properties of the determinant we see that
+        \begin{align*}
+            \det(A^tA) = \det(A^t)\det(A) = \det(A)\det(A) = \det(A)^2
+        \end{align*}
+        But also we know that $\det(I) = 1$ hence $\det(A)^2 = 1$
+        so must be that $\det(A) = \pm 1$.
+
+        From (i) we know that $A^{-1}$ exists so we have that $A^{-1}A = I$
+        but then $A^{-1}A = A^tA$ so $A^{-1} = A^t$ and we saw in (i) that
+        $A^{-1}$ is orthogonal hence $A^t$ is orthogonal.
+        In the same way, as above we see that
+        $\langle (A^t)^tA^tx - x, y\rangle = \langle AA^tx - x, y\rangle = 0$
+        for all $x,y\in \R^n$ therefore this implies that $AA^t = I$.
+
+        Let $(e_1, ..., e_n)$ be the standard basis for $\R^n$ then by
+        what we proved in (ii) we have that
+        $\langle Ae_i, Ae_j\rangle = \langle e_i, e_j\rangle = \delta_{ij}$
+        but since $A^t$ is orthogonal then it has the same property i.e.
+        $\langle A^te_i, A^te_j\rangle = \langle e_i, e_j\rangle = \delta_{ij}$
+        So joining results we have that
+        \begin{align*}
+            \langle Ae_i, Ae_j\rangle = \langle A^te_i, A^te_j\rangle
+            = \langle e_i, e_j\rangle = \delta_{ij}
+        \end{align*}
+        Therefore since $\|Ae_i\| = \|A^te_i\| = \|e_i\| = 1$ and
+        \begin{align*}
+            \langle Ae_i, Ae_j\rangle = \langle A^te_i, A^te_j\rangle = 0
+        \end{align*}
+        if $i \neq j$ then both column and row vectors of $A$ form an
+        orthonormal basis for $\R^n$.
+\cleardoublepage
+        \item [(iv)] If $A \in \bf{GL}(n, \R)$ and $A$ is orthogonal from (ii)
+        and (iii) we get that $A^tA = I$ i.e. $A \in \bf{O}(n, \R)$.
+
+        We see that the $ij$ element of $AA^t = I$ is given by
+        \begin{align*}
+           a_{i1}a^t_{1j} + a_{i2}a^t_{2j} + ... + a_{in}a^t_{nj}
+           = \sum_{1\leq k\leq n} a_{ik}a^t_{kj} = \delta_{ij}
+        \end{align*}
+        Where $a^t_{kj}$ are the elements of $A^t$.
+        Also, we see that $a^t_{kj} = a_{jk}$ then
+        \begin{align*}
+            a_{i1}a_{j1} + a_{i2}a_{j2} + ... + a_{in}a_{jn}
+            = \sum_{1\leq k\leq n} a_{ik}a_{jk} = \delta_{ij}
+        \end{align*}
+        On the other hand, if we compute $A^tA = I$ the $ij$ element is given by
+        \begin{align*}
+            a^t_{i1}a_{1j} + a^t_{i2}a_{2j} + ... + a^t_{in}a_{nj}
+            = \sum_{1\leq k\leq n} a^t_{ik}a_{kj} = \delta_{ij}
+        \end{align*}
+        But again since $a^t_{ik} = a_{ki}$ we have that 
+        \begin{align*}
+            a_{1i}a_{1j} + a_{2i}a_{2j} + ... + a_{ni}a_{nj}
+            = \sum_{1\leq k\leq n} a_{ki}a_{kj} = \delta_{ij}
+        \end{align*}
+        Finally, joining both results we have that
+        \begin{align*}
+            \sum_{1\leq k\leq n} a_{ki}a_{kj}
+            = \sum_{1\leq k\leq n} a_{ik}a_{jk} = \delta_{ij}
+        \end{align*} 
+    \end{itemize}   
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Duistermaat: 2.5}}
+    Let $R \in \bm{SO}(3, \R)$, $\alpha \in \R$ such that
+    $0 \leq \alpha \leq \pi$ and $a \in \R^3$ with $\|a\| = 1$.\\
+    Following the hint given, let $b \in N_a$ with $\|b\| = 1$ and define
+    $c = a \times b$.
+
+    First, we want to check that $Rb \in N_a$ so we want that
+    $\langle Rb, a \rangle = 0$. We see that
+    \begin{align*}
+        \langle Rb, a \rangle = \langle Rb, Ra \rangle = \langle b, a\rangle
+    \end{align*}
+    Where we used in the first equality that $Ra = a$ and in the second
+    equality we used the property determined in the previous problem.
+    But $b \in N_a$ hence must be that $\langle b, a \rangle = 0$ therefore 
+    $\langle Rb, a \rangle = 0$ and $Rb \in N_a$.
+
+    Let $\|Rb\| = 1$ then since $Rb \in N_a$ we can write that
+    $Rb = C b + D c$ for some scalars $C,D$ so we have that
+    \begin{align*}
+        \|Rb\|^2 &= 1\\
+        \langle Rb, Rb\rangle &= 1\\
+        \langle Cb + Dc, Cb + Dc\rangle &= 1\\
+        C^2\langle b, b\rangle + CD\langle b, c\rangle
+        + DC\langle c, b\rangle + D^2\langle c, c\rangle &= 1\\
+        C^2 + D^2 &= 1
+    \end{align*}
+    Where we used that $\langle b, b\rangle = 1$ and $\langle b, c\rangle = 0$.
+    Therefore must be that $C$ and $D$ are of the form $C = \cos\alpha$ and
+    $D = \sin\alpha$ and hence there exists $0\leq \alpha\leq \pi$ such that
+    $Rb = (\cos\alpha) b + (\sin\alpha) c$.
+
+    On the other hand, let $Rc \in N_a$, $\|Rc\| = 1$, $Rc \perp Rb$ and
+    $\det R = 1$. Then we can write $Rc = Ab + Bc$ for some scalars $A,B$.
+    By the same procedure we showed above we see that $A^2 + B^2 = 1$ but
+    since $Rc \perp Rb$ must be that $A = -\sin\alpha$ and $B = \cos\alpha$
+    therefore we have that $Rc = -(\sin\alpha) b + (\cos\alpha) c$.
+
+    Finally, we want to show that for any $y \in N_a$ we have that
+    $\det(a~y~Ry) > 0$. If we take the basis $(a,b,c)$ for $\R^3$ then we have
+    that
+    \begin{align*}
+        &\det\begin{pmatrix}
+            a & y_1 & y_1\\
+            0 & y_2 & y_2\cos\alpha - y_3\sin\alpha\\
+            0 & y_3 & y_2\sin\alpha + y_3\cos\alpha\\
+        \end{pmatrix} = \\
+        &\qquad= ay_2(y_2\sin\alpha + y_3\cos\alpha)
+        - ay_3(y_2\cos\alpha - y_3\sin\alpha)\\
+        &\qquad= a\sin\alpha(y_2^2 + y_3^2)
+    \end{align*}
+    Then since we can take $a > 0$ and
+    $0 \leq \alpha \leq \pi$ we have that $$\det(a~y~Ry) > 0$$
+\end{proof}
+\cleardoublepage
+\begin{proof}{\textbf{Duistermaat: 4.22}}
+\begin{itemize}
+    \item [(i)] Let $x \in \R^3$ and $y$ be component of $x$ perpendicular to 
+    $a$. Let us also define $b$ in the direction of $y$ such that $\|b\| = 1$
+    then $a \perp b$ and hence we can write that $y = \|y\|b$.
+
+    Then we can write that
+    \begin{align*}
+        x = Ca + \|y\|b + 0\cdot (a \times b) = Ca + y
+    \end{align*}
+    So with respect to the basis $(a, b, a\times b) \in \R^3$ by definition we
+    have that
+    \begin{align*}
+        \langle x, a\rangle &= C\cdot 1 + \|y\| \cdot 0 + 0\\
+        C &= \langle x, a\rangle
+    \end{align*}
+    Therefore
+    \begin{align*}
+        x = \langle x, a\rangle a + y
+    \end{align*}
+    \item [(ii)] By definition $a \times x$ is a vector such that 
+    $\langle a, a \times x \rangle = \det(a~a~x)$
+    but then by the properties of determinants since two columns are the same
+    this implies that $\langle a, a \times x \rangle = 0$ then
+    $a\times x$ is in $N_a$.
+
+    Also, since $a\times x = a \times y$ we have that
+    $\langle y, a \times y \rangle = \det(y~a~y) = 0$ which implies that
+    $a \times x$ is also perpendicular to $y$.
+
+    Finally, from Section 5.3 we know that
+    \begin{align*}
+        \langle a, y \rangle^2 + \|a \times y\|^2 = \|a\|^2\|y\|^2
+    \end{align*}
+    But $\langle a, y \rangle = 0$ since $y$ is perpendicular to $a$ and
+    $\|a\| = 1$ therefore
+    \begin{align*}
+        \|a \times y\| = \|y\|
+    \end{align*}
+    \item [(iii)] Let us compute $R_{\alpha, a} y$ as follows
+    \begin{align*}
+        \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & \cos\alpha & -\sin\alpha\\
+            0 & \sin\alpha & \cos\alpha
+        \end{pmatrix}
+        \cdot \begin{pmatrix}
+            0 \\ \|y\| \\ 0
+        \end{pmatrix}
+        = \begin{pmatrix}
+            0 \\ (\cos\alpha) \|y\| \\ (\sin\alpha) \|y\|
+        \end{pmatrix}
+    \end{align*}
+    Hence since $a \times x$ is a vector of length $\|y\|$ perpendicular to $y$
+    we can write that
+    \begin{align*}
+        R_{\alpha,a} y = (\cos\alpha)y + (\sin\alpha)a \times x
+    \end{align*}
+    Also, since $y =  x - \langle x, a\rangle a$ we have that
+    \begin{align*}
+        R_{\alpha,a} (x - \langle x, a\rangle a)
+        &= (\cos\alpha)x - (\cos\alpha)\langle x, a\rangle a + (\sin\alpha)a \times x\\
+        R_{\alpha,a} x &= R_{\alpha,a} \langle x, a\rangle a + 
+        (\cos\alpha)x - (\cos\alpha)\langle x, a\rangle a + (\sin\alpha)a \times x\\
+        R_{\alpha,a} x &= \langle x, a\rangle a + 
+        (\cos\alpha)x - (\cos\alpha)\langle x, a\rangle a + (\sin\alpha)a \times x\\
+        R_{\alpha,a} x
+        &= (1 - \cos\alpha)\langle x, a\rangle a + (\cos\alpha)x + (\sin\alpha)a \times x
+    \end{align*}
+    Where we used that $R_{\alpha,a} \langle x, a\rangle a = \langle x, a\rangle a$.
+
+    Let $a_1,a_2,a_3$ be the components of $a$ in the standard basis of
+    $\R^3$. We name the basis vectors of the standard basis as $e_1, e_2, e_3$.
+    
+    Let us compute $R_{\alpha,a} e_1$ as follows
+    \begin{align*}
+        R_{\alpha,a} e_1 &= (1 - \cos\alpha)\langle e_1, a\rangle a
+        + (\cos\alpha)e_1 + (\sin\alpha)a \times e_1\\
+        &= (1 - \cos\alpha)a_1 (a_1e_1 + a_2e_2 + a_3e_3) + (\cos\alpha)e_1\\
+        &\quad + (\sin\alpha)(a_1e_1 + a_2e_2 + a_3e_3) \times e_1\\
+        &= (\cos\alpha + a_1^2(1 - \cos\alpha))e_1 
+        + (a_3(\sin\alpha) + a_1a_2(1 - \cos\alpha)) e_2\\
+        &\quad + (-a_2(\sin\alpha) + a_1a_3(1 - \cos\alpha))e_3\\
+        &= (\cos\alpha + a_1^2c(\alpha))e_1 
+        + (a_3(\sin\alpha) + a_1a_2c(\alpha)) e_2\\
+        &\quad + (-a_2(\sin\alpha) + a_1a_3c(\alpha))e_3
+    \end{align*}
+    Where $c(\alpha) = 1 - \cos\alpha$. In the same way, we compute
+    $R_{\alpha, a}e_2$ and $R_{\alpha, a}e_3$ as follows
+    \begin{align*}
+        R_{\alpha,a} e_2 &= c(\alpha)\langle e_2, a\rangle a
+        + (\cos\alpha)e_2 + (\sin\alpha)a \times e_2\\
+        &= c(\alpha)a_2 (a_1e_1 + a_2e_2 + a_3e_3) + (\cos\alpha)e_2\\
+        &\quad + (\sin\alpha)(a_1e_1 + a_2e_2 + a_3e_3) \times e_2\\
+        &= (-a_3\sin\alpha + a_1a_2c(\alpha))e_1
+        + (\cos\alpha + a_2^2c(\alpha)) e_2\\
+        &\quad + (a_1\sin\alpha + a_2a_3c(\alpha))e_3
+    \end{align*}
+    \begin{align*}
+        R_{\alpha,a} e_3 &= c(\alpha)\langle e_3, a\rangle a
+        + (\cos\alpha)e_3 + (\sin\alpha)a \times e_3\\
+        &= c(\alpha)a_3 (a_1e_1 + a_2e_2 + a_3e_3) + (\cos\alpha)e_3\\
+        &\quad + (\sin\alpha)(a_1e_1 + a_2e_2 + a_3e_3) \times e_3\\
+        &= (a_2\sin\alpha + a_1a_3c(\alpha))e_1
+        + (-a_1\sin\alpha + a_2a_3c(\alpha)) e_2\\
+        &\quad + (\cos\alpha + a_3^2c(\alpha))e_3
+    \end{align*}
+    Then $R_{\alpha, a}$ with respect to the standard basis for $\R^3$ is
+    given by
+    \begin{align*}
+        R_{\alpha, a} = \begin{pmatrix}
+            \cos\alpha + a_1^2c(\alpha)
+            & -a_3\sin\alpha + a_1a_2c(\alpha)
+            & a_2\sin\alpha + a_1a_3c(\alpha) \\
+            a_3\sin\alpha + a_1a_2c(\alpha)
+            & \cos\alpha + a_2^2c(\alpha)
+            & -a_1\sin\alpha + a_2a_3c(\alpha) \\
+            -a_2\sin\alpha + a_1a_3c(\alpha)
+            & a_1\sin\alpha + a_2a_3c(\alpha)
+            & \cos\alpha + a_3^2c(\alpha)
+        \end{pmatrix}
+    \end{align*}
+    Suppose now that $R_{\alpha, a} = R_{\beta, b}$ then must be that
+    $\tr(R_{\alpha, a}) = \tr(R_{\beta, b})$ hence
+    \begin{align*}
+        3\cos\alpha + a_1^2c(\alpha) + a_2^2c(\alpha) + a_3^2c(\alpha)
+        = 3\cos\beta + b_1^2c(\beta) + b_2^2c(\beta) + b_3^2c(\beta)\\
+        3(\cos\alpha - \cos\beta) + a_1^2c(\alpha) - b_1^2c(\beta)
+        + a_2^2c(\alpha) - b_2^2c(\beta) + a_3^2c(\alpha) - b_3^2c(\beta)
+        =  0
+    \end{align*}
+    If $\alpha = \beta = 0$ with $a,b$ arbitrary the equation holds.
+
+    If $0 < \alpha = \beta < \pi$ and $a = b$ then the equation also holds.
+
+    Finally if $\alpha = \beta = \pi$ we have that
+    \begin{align*}
+        a_1^2c(\pi) - b_1^2c(\pi) + a_2^2c(\pi) - b_2^2c(\pi)
+        + a_3^2c(\pi) - b_3^2c(\pi) &= 0\\
+        2a_1^2 - 2b_1^2 + 2a_2^2 - 2b_2^2 + 2a_3^2 - 2b_3^2 &= 0\\
+        a_1^2 - b_1^2 + a_2^2 - b_2^2 + a_3^2 - b_3^2 &= 0
+    \end{align*}
+    So the only way for this equation to hold is that $a = \pm b$.
+
+    \item [(iv)] We know that $\tr(R_{\alpha, a}) = 1 + 2\cos\alpha$ hence
+    \begin{align*}
+        2\cos\alpha &= \tr(R_{\alpha, a}) - 1\\
+        \cos\alpha &= \frac{1}{2}(\tr(R_{\alpha, a}) - 1)
+    \end{align*}
+    Also, $R_{\alpha, a}^t$ is
+    \begin{align*}
+        R_{\alpha, a}^t = \begin{pmatrix}
+            \cos\alpha + a_1^2c(\alpha)
+            & a_3\sin\alpha + a_1a_2c(\alpha)
+            & -a_2\sin\alpha + a_1a_3c(\alpha)\\
+            %
+            -a_3\sin\alpha + a_1a_2c(\alpha)
+            & \cos\alpha + a_2^2c(\alpha)
+            & a_1\sin\alpha + a_2a_3c(\alpha)\\
+            %
+            a_2\sin\alpha + a_1a_3c(\alpha)
+            & -a_1\sin\alpha + a_2a_3c(\alpha)
+            & \cos\alpha + a_3^2c(\alpha)
+        \end{pmatrix}
+    \end{align*}
+    Then 
+    \begin{align*}
+        &R_{\alpha, a} - R_{\alpha, a}^t = \\
+        &\begin{pmatrix}
+            \cos\alpha + a_1^2c(\alpha)
+            & -a_3\sin\alpha + a_1a_2c(\alpha)
+            & a_2\sin\alpha + a_1a_3c(\alpha) \\
+            a_3\sin\alpha + a_1a_2c(\alpha)
+            & \cos\alpha + a_2^2c(\alpha)
+            & -a_1\sin\alpha + a_2a_3c(\alpha) \\
+            -a_2\sin\alpha + a_1a_3c(\alpha)
+            & a_1\sin\alpha + a_2a_3c(\alpha)
+            & \cos\alpha + a_3^2c(\alpha)
+        \end{pmatrix}\\
+        &- \begin{pmatrix}
+            \cos\alpha + a_1^2c(\alpha)
+            & a_3\sin\alpha + a_1a_2c(\alpha)
+            & -a_2\sin\alpha + a_1a_3c(\alpha)\\
+            %
+            -a_3\sin\alpha + a_1a_2c(\alpha)
+            & \cos\alpha + a_2^2c(\alpha)
+            & a_1\sin\alpha + a_2a_3c(\alpha)\\
+            %
+            a_2\sin\alpha + a_1a_3c(\alpha)
+            & -a_1\sin\alpha + a_2a_3c(\alpha)
+            & \cos\alpha + a_3^2c(\alpha)
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            0
+            & -2a_3\sin\alpha
+            & 2a_2\sin\alpha \\
+            2a_3\sin\alpha
+            & 0
+            & -2a_1\sin\alpha \\
+            -2a_2\sin\alpha
+            & 2a_1\sin\alpha
+            & 0
+        \end{pmatrix}\\
+        &= 2\sin\alpha\begin{pmatrix}
+            0 & -a_3 & a_2 \\
+            a_3 & 0 & -a_1 \\
+            -a_2 & a_1 & 0
+        \end{pmatrix}
+    \end{align*}
+    On the other hand, suppose there is an angle $\beta \in \R$ where
+    $0 < \beta < \pi$ and an axis of rotation $b \in \R^3$ such that
+    $R_{\alpha, a} = R_{\beta, b}$.
+    Since the trace does not depend on the representation of
+    $R_{\alpha, a}$ must be that
+    \begin{align*}
+        \cos\alpha = \frac{1}{2}(\tr(R_{\alpha, a}) - 1)
+        = \frac{1}{2}(\tr(R_{\beta, b}) - 1) = \cos\beta
+    \end{align*} 
+    This implies that $\alpha = \beta$.
+    Also, we see that $r_a = (R_{\alpha, a} - R_{\alpha, a}^t)/2\sin\alpha$
+    and since $0<\alpha < \pi$ then $\sin\alpha \neq 0$ so
+    \begin{align*}
+        r_a = \frac{(R_{\alpha, a} - R_{\alpha, a}^t)}{2\sin\alpha}
+        = \frac{(R_{\beta, b} - R_{\beta, b}^t)}{2\sin\beta} = r_b
+    \end{align*}
+    Which implies that $a = b$ since the entries of $r_a$ and $r_b$ are the 
+    components of $a$ and $b$ respectively.
+    
+    Let now, $\alpha = 0$ then
+    $$R_{0, a} = \begin{pmatrix}
+        1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1
+    \end{pmatrix}$$
+    for any $a \in \R^3$ so in this case is not uniquely determined by
+    $R_{0, a}$.
+
+    Finally, let $\alpha = \beta =\pi$ then as mentioned if we write $R_{\pi, a}$ as
+    $(r_{ij})$ and $R_{\pi, b}$ as $(s_{ij})$ then $(r_{ij}) = (s_{ij})$.
+    Also, we know that $2a_i^2 = 1 + r_{ii}$ and that $2a_ia_j = r_{ij}$
+    then must be that
+    \begin{align*}
+        2a_i^2 = 1 + r_{ii} = 1 + s_{ii} = 2b_i^2  
+    \end{align*}
+    Which implies that $a_i = \pm b_i$. Also, must be that
+    \begin{align*}
+        a_ia_j = r_{ij} = s_{ij} = b_ib_j
+    \end{align*}
+    Since at least one $a_i\neq 0$ let $a_1 \neq 0$ and suppose $a_1 = b_1$
+    then from the second equation we get that $a_j = b_j$.
+    But if we take $a_1 = -b_1$ then we get that $a_j = -b_j$.
+
+    Therefore $R_{\pi,a}$ determines $a$ to within a factor of $\pm 1$.
+\end{itemize}
 \end{proof}
 
 \end{document}
