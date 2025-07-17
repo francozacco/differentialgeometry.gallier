@@ -2008,6 +2008,27 @@ Let $R \in \bm{SO}(n)$
 \end{itemize}
 \end{proof}
 
+\cleardoublepage
+\subsection*{2.3 Symmetric Matrices, Symmetric Positive Definite Matrices, and
+the Exponential Map}
+1) Show that $\text{exp}:\bm{S}(n) \to \bm{SPD}(n)$ is a homeomorphism
+\begin{proof}{}
+    First, we want to show that the exponential map is continuous.\\
+    Let $A \in \bm{S}(n)$ then we can take $M \geq 0$ such that
+    $\|A\| < M$ also, we see that $e^M = \sum_{n=0}^\infty M^n/n! < \infty$.
+    Then by the Weierstrass M-test the series
+    \begin{align*}
+        e^A = \sum_{n=0}^\infty \frac{A^n}{n!}
+    \end{align*}
+    converges uniformly on the ball $B(0, M)$ and since $A^n/n!$ is continuous
+    for each $n \geq 0$ then $e^A$ is continuous on $B(0, M)$.\\
+    Finally, since each $B(0,M)$ is open then $e^A$ is continuous everywhere.
+    \\\\
+    TODO: Prove that the inverse is continuous.
+
+\end{proof}
+
+
 
 
 \end{document}
